@@ -7,9 +7,7 @@ class Auth extends CI_Controller {
         $this->load->model('User_Model');
         $this->load->library('session'); // Load session library
         
-        if (!$this->session->userdata('is_logged_in')) {
-            redirect('auth/login');
-        }
+        
     }
 
     public function login() {
