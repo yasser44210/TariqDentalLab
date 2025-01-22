@@ -1,58 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <meta charset="utf-8">
+    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- LINEARICONS -->
+    <link rel="stylesheet" href="<?= base_url('assets/fonts/linearicons/style.css') ?>">
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
+
 </head>
+
 <body>
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-4">
-            <h3 class="text-center">Login</h3>
+
+<div class="wrapper">
+    <div class="inner">
+        <img src="<?= base_url() ?>assets/images/image-1.png" alt="" class="image-1">
+        <form action="<?= base_url('auth/login') ?>" method="post">
+            <h3>Login</h3>
+            <div class="form-holder">
+                <span class="lnr lnr-user"></span>
+                <input type="text" class="form-control" name="username" placeholder="username">
+            </div>
+            <div class="form-holder">
+                <span class="lnr lnr-lock"></span>
+                <input type="password" class="form-control" name="password" placeholder="password">
+            </div>
+            <button>
+                <span>Login</span>
+            </button>
+
+            <!-- Move the error message here -->
             <?php if ($this->session->flashdata('error')): ?>
-                <div class="alert alert-danger">
+                <div class="alert alert-danger" style="margin-top: 10px;">
                     <?= $this->session->flashdata('error') ?>
                 </div>
             <?php endif; ?>
-            <form action="<?= base_url('auth/login') ?>" method="post">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" id="username" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <div class="input-group">
-                        <input type="password" name="password" class="form-control" id="password" required>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                <i class="bi bi-eye-slash" id="toggleIcon"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </div>
-            </form>
-        </div>
+        </form>
+        <img src="<?= base_url() ?>assets/images/image-2.png" alt="" class="image-2">
     </div>
 </div>
 
-<script>
-    // Show/hide password toggle functionality
-    $('#togglePassword').click(function () {
-        const passwordField = $('#password');
-        const passwordFieldType = passwordField.attr('type') === 'password' ? 'text' : 'password';
-        passwordField.attr('type', passwordFieldType);
-        
-        // Toggle the icon class
-        $('#toggleIcon').toggleClass('bi-eye bi-eye-slash');
-    });
-</script>
-
-<!-- Bootstrap Icons CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+<script src="<?= base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+<script src="<?= base_url('assets/js/main.js') ?>"></script>
 
 </body>
 </html>
