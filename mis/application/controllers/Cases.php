@@ -93,6 +93,7 @@ class Cases extends CI_Controller {
         }
 
     }
+    
 
     public function index() {
         $this->load->model('Cases_Model');

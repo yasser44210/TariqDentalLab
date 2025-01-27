@@ -4,6 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'cases'; // Set default controller
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+//$route['doctors'] = 'doctors/index';  // Main page
+//$route['doctors/fetchDoctors'] = 'doctors/fetchDoctors';  // AJAX endpoint
+
 
 //case registration
 // $route['cases'] = 'cases/index';

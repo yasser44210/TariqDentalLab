@@ -5,7 +5,7 @@
     <div class="col-lg-6">
         <div class="card shadow-lg border-0">
             <div class="card-header bg-primary text-white text-center">
-                <h4>Add New Doctor</h4>
+                <h4>Update Doctor</h4>
             </div>
             <div class="card-body">
             <form method="post" action="<?= base_url('doctors/edit/'.$doctor['ID']); ?>">

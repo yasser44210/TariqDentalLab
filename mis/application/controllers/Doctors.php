@@ -91,16 +91,57 @@ class Doctors extends CI_Controller{
         }
 
     }
-    
-    
-    
     public function index(){
         $this->load->model('Doctors_Model');
         $data['doctors'] = $this->Doctors_Model->get_all_doctors($id);
         $this->load->view('doctors/index', $data);
+        
 
-        
-        
+
+        $this->load->library('pagination');
+        $config['base_url'] = base_url('doctors/index');
+        $config['total_rows'] = $this->Doctors_Model->get_doctors_count();
+        $config['per_page'] = 5;
+
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['doctors'] = $this->Doctors_Model->get_all_doctors($config['per_page'], $page);
+        $data['pagination'] = $this->pagination->create_links();   
+    }
+
+    public function search() {
+        $searchQuery = $this->input->post('searchQuery');
+        $data['doctors'] = $this->Doctors_Model->search_doctors($searchQuery);
+        $data['searchQuery'] = $searchQuery;
+
+        $this->load->view('doctors/search_results', $data);
+    }
+
+    public function view($id) {
+        $doctor = $this->Doctors_Model->get_doctor_by_id($id);
+    
+        if (empty($doctor)) {
+            $this->session->set_flashdata('error', 'Doctor not found');
+            redirect(base_url('doctors/index'));
+        }
+    
+        $data['doctor'] = $doctor;
+        $this->load->view('doctors/view_doctor', $data);
+    }
+    
+    public function assign_case($id) {
+        $doctor = $this->Doctors_Model->get_doctor_by_id($id);
+    
+        if (empty($doctor)) {
+            $this->session->set_flashdata('error', 'Doctor not found');
+            redirect(base_url('doctors/index'));
+        }
+    
+        // Your logic for assigning a case goes here
+        // Redirect after assigning a case or show a form
+        $this->session->set_flashdata('success', 'Case assigned successfully!');
+        redirect(base_url('doctors/view/' . $id));
     }
 }
 ?>
