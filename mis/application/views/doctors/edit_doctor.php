@@ -21,6 +21,7 @@
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" id="email" value="<?= set_value('email', $doctor['email']); ?>" required>
                     <div class="d-grid">
+                    <br>
                     <button type="submit" class="btn btn-success btn-lg">Update Doctor</button>
                     </div>
                 </form>

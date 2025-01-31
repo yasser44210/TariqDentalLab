@@ -25,8 +25,6 @@
                         <button type="submit" class="btn btn-success btn-lg">Add Doctor</button>
                     </div>
                 </form>
-                
-                <!-- Flash Messages -->
                 <?php if ($this->session->flashdata('success')) : ?>
                     <div class="alert alert-success mt-3" role="alert">
                         <?php echo $this->session->flashdata('success'); ?>

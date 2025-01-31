@@ -44,23 +44,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Doctors Management</p>
-                </a>
+              <a href="<?php echo base_url('doctors/index'); ?>" class="nav-link">Doctors Mangaement</a>
               </li>
+              
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Case Mangaement</p>
-                </a>
+              <a href="<?php echo base_url('cases/index'); ?>" class="nav-link">Case Mangaement</a>
               </li>
-              <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <!-- <p>Dashboard v3</p> -->
-                </a>
-              </li>
+              
             </ul>
           </li>
           <li class="nav-item">

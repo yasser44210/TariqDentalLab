@@ -9,7 +9,7 @@ class Doctors extends CI_Controller{
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('session'); 
-        $this->load->model('Doctors_Model');
+        $this->load->model(['Doctors_Model', 'Cases_Model']);
         
         if (!$this->session->userdata('is_logged_in')) {
             redirect('auth/login');
@@ -91,24 +91,6 @@ class Doctors extends CI_Controller{
         }
 
     }
-    public function index(){
-        $this->load->model('Doctors_Model');
-        $data['doctors'] = $this->Doctors_Model->get_all_doctors($id);
-        $this->load->view('doctors/index', $data);
-        
-
-
-        $this->load->library('pagination');
-        $config['base_url'] = base_url('doctors/index');
-        $config['total_rows'] = $this->Doctors_Model->get_doctors_count();
-        $config['per_page'] = 5;
-
-        $this->pagination->initialize($config);
-
-        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-        $data['doctors'] = $this->Doctors_Model->get_all_doctors($config['per_page'], $page);
-        $data['pagination'] = $this->pagination->create_links();   
-    }
 
     public function search() {
         $searchQuery = $this->input->post('searchQuery');
@@ -118,30 +100,42 @@ class Doctors extends CI_Controller{
         $this->load->view('doctors/search_results', $data);
     }
 
-    public function view($id) {
-        $doctor = $this->Doctors_Model->get_doctor_by_id($id);
-    
-        if (empty($doctor)) {
-            $this->session->set_flashdata('error', 'Doctor not found');
-            redirect(base_url('doctors/index'));
-        }
-    
-        $data['doctor'] = $doctor;
-        $this->load->view('doctors/view_doctor', $data);
+    public function view_cases($doctorID){
+        $data['doctor'] = $this->Doctors_Model->get_doctor_by_id($doctorID);
+        $data['cases'] = $this->Cases_Model->get_cases_by_doctor($doctorID);
+        $data['all_cases'] = $this->Cases_Model->get_all_cases();
+        $this->load->view('doctors/view_cases', $data);
     }
-    
-    public function assign_case($id) {
-        $doctor = $this->Doctors_Model->get_doctor_by_id($id);
-    
-        if (empty($doctor)) {
-            $this->session->set_flashdata('error', 'Doctor not found');
-            redirect(base_url('doctors/index'));
+
+    public function assign_case(){
+        if($_SERVER['REQUEST_METHOD']=='POST') {
+            $doctorID = $this->input->post('doctorID');
+            $caseTypeID = $this->input->post('caseTypeID');
+            $RecDate = date('Y-m-d');
+            $ComDate = date('Y-m-d', strtotime('+7 days'));
+            $Status = 'Pending';
+            
+            $data = [
+                'doctorID' => $doctorID,
+                'caseTypeID' => $caseTypeID,
+                'RecDate' => $RecDate,
+                'ComDate' => $ComDate,
+                'caseStatus' => $Status
+            ];
+
+            if ($this->Cases_Model->assign_case($data)) {
+                $this->session->set_flashdata('success', 'Case assigned successfully');
+            } else {
+                $this->session->set_flashdata('error', 'Failed to assign case');
+            }
+            redirect('doctors/view_cases/'.$doctorID);
         }
-    
-        // Your logic for assigning a case goes here
-        // Redirect after assigning a case or show a form
-        $this->session->set_flashdata('success', 'Case assigned successfully!');
-        redirect(base_url('doctors/view/' . $id));
     }
+
+    public function index(){
+        $this->load->model('Doctors_Model');
+        $data['doctors'] = $this->Doctors_Model->get_all_doctors($id);
+        $this->load->view('doctors/index', $data); 
+    }    
 }
 ?>

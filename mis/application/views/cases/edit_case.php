@@ -34,6 +34,14 @@
                             <label for="price" class="form-label">Price</label>
                             <input type="number" class="form-control" name="price" value="<?= htmlspecialchars($cases['price'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Enter price" id="price" required>
                         </div>
+                        <div class="mb-4">
+                        <label for="recDate" class="form-label">recived Date</label>
+                        <input type="date" class="form-control" name="recDate" placeholder="Enter case reciving date" id="recDate" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="ComDate" class="form-label">Completion Date</label>
+                            <input type="date" class="form-control" name="ComDate" placeholder="Enter case completion date" id="ComDate" required>
+                        </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-success btn-lg">Update Case</button>
                         </div>

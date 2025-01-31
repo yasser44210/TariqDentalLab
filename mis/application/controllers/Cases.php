@@ -10,26 +10,26 @@ class Cases extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('session'); 
         $this->load->model('Cases_Model');
-
-        //if (!$this->session->userdata('is_logged_in')) {
-          //  redirect('auth/login');
-       // }
     }
 
     public function add(){
         
-        $data['types'] = ['Type1', 'Type2', 'Type3'];
+        $data['types'] = ['Type1', 'Type2', 'Type3', 'Type4', 'Type5'];
         if($_SERVER['REQUEST_METHOD']=='POST') {
             $caseName = $this->input->post('caseName');
             $type = $this->input->post('type');
             $cost = $this->input->post('cost');
             $price = $this->input->post('price');
+            $RecDate = $this->input->post('RecDate');
+            $ComDate = $this->input->post('ComDate');
 
             $data = array(
                 'caseName' => $caseName,
                 'type' => $type,
                 'cost' => $cost,
                 'price' => $price,
+                'recivdate' => $RecDate,
+                'complationdate' => $ComDate,
             );
 
             $status = $this->Cases_Model->insertCase($data);
@@ -58,12 +58,16 @@ class Cases extends CI_Controller {
             $type = $this->input->post('type');
             $cost = $this->input->post('cost');
             $price = $this->input->post('price');
+            $RecDate = $this->input->post('RecDate');
+            $ComDate = $this->input->post('ComDate');
     
             $data = array(
                 'caseName' => $caseName,
                 'type' => $type,
                 'cost' => $cost,
                 'price' => $price,
+                'recivdate' => $RecDate,
+                'complationdate' => $ComDate,
             );
     
             $status = $this->Cases_Model->updateCase($data, $id);
@@ -92,8 +96,7 @@ class Cases extends CI_Controller {
             redirect(base_url('cases/index'));
         }
 
-    }
-    
+    }    
 
     public function index() {
         $this->load->model('Cases_Model');

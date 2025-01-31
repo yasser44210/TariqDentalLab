@@ -1,5 +1,6 @@
 <?php $this->load->view('includes/header'); ?>
 
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8">
@@ -18,11 +19,11 @@
         <table class="table table-hover">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Actions</th>
+                    <th >ID</th>
+                    <th >Name</th>
+                    <th >Phone</th>
+                    <th >Email</th>
+                    <th >Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,19 +36,22 @@
                         </td>
                         <td><?= $doctor['Phone']; ?></td>
                         <td><?= $doctor['email']; ?></td>
+                        </td>
                         <td>
                             <a href="<?= base_url('doctors/edit/'.$doctor['ID']); ?>" class="btn btn-primary btn-sm">Edit</a>
                             <a href="<?= base_url('doctors/delete/'.$doctor['ID']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</a>
-                            <!-- <a href="<?= base_url('cases/add/'.$doctor['ID']); ?>" class="btn btn-secondary btn-sm">Assign Case</a> -->
+                            <a href="<?= base_url('doctors/view_cases/'.$doctor['ID']); ?>" class="btn btn-secondary btn-sm">View Cases</a>
+                        </td>
+
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <div>
-            <?= $pagination; ?>
-        </div>
+                
     </div>
+    <br>
+    <a href="<?= base_url('doctors/add/'.$doctor['ID']); ?>" class="btn btn-secondary btn-sm">add new doctor</a>
 </div>
 
 <?php $this->load->view('includes/footer'); ?>

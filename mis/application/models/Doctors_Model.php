@@ -41,14 +41,6 @@ class Doctors_Model extends CI_Model{
         }
     }
     
-    public function get_doctors_count() {
-        return $this->db->count_all('doctors'); // Ensure the 'doctors' table exists
-    }
-
-    
-    
-    
-
     public function search_doctors($searchQuery) {
         $this->db->like('Name', $searchQuery);
         $this->db->or_like('Phone', $searchQuery);
@@ -56,6 +48,7 @@ class Doctors_Model extends CI_Model{
         $query = $this->db->get('doctors');
         return $query->result_array();
     }
+
 }
 
 ?>

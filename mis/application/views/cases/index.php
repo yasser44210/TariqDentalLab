@@ -28,6 +28,8 @@
                             <td><?= htmlspecialchars($case['type'], ENT_QUOTES, 'UTF-8'); ?></td>
                             <td><?= htmlspecialchars($case['cost'], ENT_QUOTES, 'UTF-8'); ?></td>
                             <td><?= htmlspecialchars($case['price'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?= htmlspecialchars($case['RecDate'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?= htmlspecialchars($case['ComDate'], ENT_QUOTES, 'UTF-8'); ?></td>
                             <td>
                               <a href="<?= base_url('cases/edit/'.$case['caseTypeID']); ?>" class="btn btn-primary btn-sm mr-2">Edit</a> 
                               <a href="<?= base_url('cases/delete/'.$case['caseTypeID']); ?>"onclick="return confirm('Are you sure you want to delete this record?')" class="btn btn-danger btn-sm">Delete</a>
